@@ -2,7 +2,8 @@
 
 import { Command } from 'commander';
 import fs from 'fs';
-import path, { resolve } from 'path';
+import path from 'path';
+import process from 'process';
 import getDiff from '../src/getDiff.js'
 // import { fileURLToPath } from 'url';
 // import { dirname } from 'path';
@@ -17,13 +18,8 @@ program
     .arguments('<filepath1> <filepath2>')
     .description('Compares two configuration files and shows a difference.')
     .action((filepath1, filepath2) => {
-        console.log(filepath1, filepath2);
-        const getFixturePath = (filename) => path.join('__fixtures__', filename);
-
-        const relPath1 = getFixturePath(filepath1);
-        const relPath2 = getFixturePath(filepath2);
-        
-        console.log( getDiff(fs.readFileSync(path.resolve(relPath1)), fs.readFileSync(path.resolve(relPath2))));
+        const currWorkDir = process.cwd();
+        console.log( getDiff(fs.readFileSync(path.resolve(currWorkDir, filepath1)), fs.readFileSync(path.resolve(currWorkDir, filepath2))));
     })
 
 program.parse();

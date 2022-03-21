@@ -9,8 +9,8 @@ const convertObjToStr = (obj) => {
 };
 
 const getDiffsForPrint = (file1, file2) => {
-    const o1 = parseJSONToObj(file1);
-    const o2 = parseJSONToObj(file2);
+  const o1 = parseJSONToObj(file1);
+  const o2 = parseJSONToObj(file2);
   const arr1 = Object.keys(o1);
   const arr2 = Object.keys(o2);
   
