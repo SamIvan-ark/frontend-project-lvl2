@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import readFile from './utils/readFile.js';
+import readFileByPath from './utils/readFile.js';
 import convertObjToStrNormalized from './utils/convertObjToStrNormalized.js';
 
 
-const readAndGetDiffsForPrint = (file1, file2) => {
-  const o1 = JSON.parse(readFile(file1));
-  const o2 = JSON.parse(readFile(file2));
+const readAndGetDiffsForPrint = (path1, path2) => {
+  const o1 = JSON.parse(readFileByPath(path1));
+  const o2 = JSON.parse(readFileByPath(path2));
   const arr1 = Object.keys(o1);
   const arr2 = Object.keys(o2);
   

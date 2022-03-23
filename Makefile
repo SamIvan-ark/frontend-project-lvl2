@@ -9,3 +9,6 @@ link: #установка пакета в систему
 
 lint: #проверка линтером
 	npx eslint .
+
+test: #запуск тестов
+	NODE_OPTIONS=--experimental-vm-modules npx jest --watch
