@@ -1,16 +1,11 @@
 import _ from 'lodash';
+import readFile from './utils/readFile.js';
+import convertObjToStrNormalized from './utils/convertObjToStrNormalized.js';
 
-const parseJSONToObj = (json) => JSON.parse(json);
 
-const convertObjToStr = (obj) => {
-    const json = JSON.stringify(obj, null, '  ');
-  
-    return json.replaceAll('"', '');
-};
-
-const getDiffsForPrint = (file1, file2) => {
-  const o1 = parseJSONToObj(file1);
-  const o2 = parseJSONToObj(file2);
+const readAndGetDiffsForPrint = (file1, file2) => {
+  const o1 = JSON.parse(readFile(file1));
+  const o2 = JSON.parse(readFile(file2));
   const arr1 = Object.keys(o1);
   const arr2 = Object.keys(o2);
   
@@ -33,8 +28,8 @@ const getDiffsForPrint = (file1, file2) => {
       : {...acc, ["+ " + key]: o2[key]};
   }, {});
   
-  const strObj = convertObjToStr(diffObj);
+  const strObj = convertObjToStrNormalized(diffObj);
   return strObj;
 }
 
-export default getDiffsForPrint;
+export default readAndGetDiffsForPrint;
