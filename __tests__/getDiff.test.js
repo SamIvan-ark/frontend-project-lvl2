@@ -9,10 +9,10 @@ describe('compare flat files', () => {
     const diff = getDiff(path1, path2);
     const right = readFileByPath('__fixtures__/test1.json');
 
-    test('output is must be string', () => {
+    test('output type is must be string', () => {
         expect(typeof(diff) === 'string').toBeTruthy;
     })
     test('output is must be as expected', () => {
         expect(diff).toBe(right);
     });
-})
+});
