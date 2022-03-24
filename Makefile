@@ -10,5 +10,5 @@ link: #установка пакета в систему
 lint: #проверка линтером
 	npx eslint .
 
-test: #запуск тестов проверОЧКА
+test: #запуск тестов
 	npx jest NODE_OPTIONS=--experimental-vm-modules
