@@ -1,35 +1,56 @@
 import _ from 'lodash';
-import parseFile from './utils/parseFile.js';
-import convertObjToStrNormalized from './utils/convertObjToStrNormalized.js';
 
-
-const readAndGetDiffsForPrint = (path1, path2) => {
-  const o1 = parseFile(path1);
-  const o2 = parseFile(path2);
-  const arr1 = Object.keys(o1);
-  const arr2 = Object.keys(o2);
-  
-  const unionKeys = _.intersection(arr1, arr2);
-  const allKeys = _.union(arr1, arr2);
-  const allKeysSorted = _.sortBy(allKeys);
-
-  const diffObj = allKeysSorted.reduce((acc, key) => {
-    if (unionKeys.includes(key)) {
-      if (o1[key] === o2[key]) {
-        return {...acc, ["  " + key]: o1[key]};
+const getDiff = (data1, data2) => {
+  const iter = (obj1, obj2) => {
+    const arr1 = Object.keys(obj1);
+    const arr2 = Object.keys(obj2);
+    
+    const intersectionKeys = _.intersection(arr1, arr2);
+    const keysUnion = _.union(arr1, arr2);
+    const allKeysSorted = _.sortBy(keysUnion);
+    
+    const diff = allKeysSorted.reduce((acc, key) => {
+      if (intersectionKeys.includes(key)) {
+        if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {                        
+          return [...acc, {
+              name: key,
+              valueStatus: 'object',
+              children: iter(obj1[key], obj2[key])
+          }];
+        }
+        if (obj1[key] === obj2[key]) {
+            return [...acc, {
+                name: key,
+                valueStatus: 'equial',
+                value: obj2[key],
+            }];
+        }
+        return [ ...acc, {
+            name: key,
+            valueStatus: 'changed',
+            value: [ obj1[key], obj2[key] ],
+        }];
       }
-      return {
-        ...acc, 
-        ["- " + key]: o1[key], 
-        ["+ " + key]: o2[key]};
-    }
-    return Object.prototype.hasOwnProperty.call(o1, key)
-      ? {...acc, ["- " + key]: o1[key]}
-      : {...acc, ["+ " + key]: o2[key]};
-  }, {});
-  
-  const strObj = convertObjToStrNormalized(diffObj);
-  return strObj;
-}
 
-export default readAndGetDiffsForPrint;
+      if (Object.prototype.hasOwnProperty.call(obj1, key)) {
+        return [...acc, {
+              name: key,
+              valueStatus: 'deleted',
+              value: obj1[key],
+        }];
+      } else {
+        return [...acc, {
+            name: key,
+            valueStatus: 'added',
+            value: obj2[key],
+        }];
+      }
+    }, []);
+      
+      return diff;
+    };
+
+  return iter(data1, data2);
+}; 
+
+export default getDiff;
