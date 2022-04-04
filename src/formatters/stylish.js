@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const normalizeStylishOutput = (obj) => {
   const json = JSON.stringify(obj, null, 4);
-  return json.replaceAll('   "', ' ').replaceAll(/,|"/g, ''); //crutch!!!
+  return json.replaceAll('   "', ' ').replaceAll(/,|"/g, ''); /* !!!crutch!! */
 };
 
 const getStylishOutput = (diff) => {

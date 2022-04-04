@@ -8,7 +8,7 @@ const program = new Command;
 
 program
     .name('gendiff')
-    .version('0.4.0')
+    .version('0.5.0')
     .option('-f, --format [type]', 'output format', 'stylish')
     .arguments('<filepath1> <filepath2>')
     .description('Compares two configuration files and shows a difference.')
