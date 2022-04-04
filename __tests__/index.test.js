@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import gendiff from '../src/index.js';
+import gendiff from '../index.js';
 import readFile from '../src/utils/readFile.js';
 
 const getFixturePath = (fileName) => `__fixtures__/${fileName}`;
