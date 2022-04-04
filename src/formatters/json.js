@@ -1,5 +1,3 @@
-const getJSONOutput = (diff) => {
-  return JSON.stringify(diff, null, 4);
-};
+const getJSONOutput = (diff) => JSON.stringify(diff);
 
 export default getJSONOutput;

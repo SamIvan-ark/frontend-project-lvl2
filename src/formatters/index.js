@@ -5,7 +5,7 @@ import getJSONOutput from './json.js';
 const formatDiff = (diff, formatName) => {
   if (formatName === 'stylish') {
     return getStylishOutput(diff);
-    }
+  }
   if (formatName === 'plain') {
     return getPlainOutput(diff);
   }
