@@ -13,7 +13,7 @@ const formatDiff = (diff, formatName) => {
     return getJSONOutput(diff);
   }
 
-  throw (new Error('no such format, please double check format type (stylish or plain)'));
+  throw (new Error('no such format, please double check format type ("stylish", "plain" or "json")'));
 };
 
 export default formatDiff;
