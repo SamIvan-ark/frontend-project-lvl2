@@ -7,6 +7,7 @@ on:
     
 env:
   CI: true
+  CC_TEST_REPORTER_ID: ${{ secrets.REPORTERID }}
   
 jobs:
   build:
@@ -15,6 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: paambaati/codeclimate-action@v2.2.4
       
     - name: Install dependencies
       run: make install
@@ -22,9 +24,9 @@ jobs:
     - name: Run lint
       run: make lint
       
-    - name: Run test
-      run: make test
-      
+    - name: Test coverage
+      run: make test-coverage
+
 #     - name: Test & publish code coverage
 #       # Publish code coverage on Code Climate
 #       # https://github.com/paambaati/codeclimate-action
