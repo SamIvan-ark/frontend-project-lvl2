@@ -4,10 +4,15 @@ import yaml from 'js-yaml';
 const defineParser = (filePath) => {
   const ext = path.extname(filePath);
 
-  if (['.yml', '.yaml'].includes(ext)) {
+  if (ext === '.yml' || ext === '.yaml') {
     return yaml.load;
   }
-  return JSON.parse;
+
+  if (ext === '.json') {
+    return JSON.parse;
+  }
+
+  throw new Error(`Cant read file. Format ${ext} is not supported.`);
 };
 
 export default defineParser;
