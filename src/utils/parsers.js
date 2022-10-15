@@ -2,17 +2,17 @@ import path from 'path';
 import yaml from 'js-yaml';
 
 const defineParser = (filePath) => {
-  const ext = path.extname(filePath);
+  const extension = path.extname(filePath);
 
-  if (ext === '.yml' || ext === '.yaml') {
+  if (extension === '.yml' || extension === '.yaml') {
     return yaml.load;
   }
 
-  if (ext === '.json') {
+  if (extension === '.json') {
     return JSON.parse;
   }
 
-  throw new Error(`Cant read file. Format ${ext} is not supported.`);
+  throw new Error(`Cant read file. Format ${extension} is not supported.`);
 };
 
 export default defineParser;
