@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
 import gendiff from '../index';
-import readFile from '../src/utils/readFile';
 
-const resultStylish = readFile('__fixtures__/resultStylish.txt');
-const resultPlain = readFile('__fixtures__/resultPlain.txt');
+const resultStylish = fs.readFileSync(path.resolve(process.cwd(), '__fixtures__/resultStylish.txt'), 'utf-8');
+const resultPlain = fs.readFileSync(path.resolve(process.cwd(), '__fixtures__/resultPlain.txt'), 'utf-8');
 
 const extensions = ['.yml', '.json'];
 
