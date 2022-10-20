@@ -2,14 +2,6 @@
 import gendiff from '../index';
 import readFile from '../src/utils/readFile';
 
-// Александр, добрый день!
-// https://ru.hexlet.io/projects/46/members/20442/reviews#:~:text=let%20resultStylish%3B%20let%20resultPlain%3B%20let%20resultJson%3B
-// не пропускают тесты Хекслета, так как не должно быть мутаций.
-// Оказывается, в том числе, и в тестах)
-
-// Вопрос: для чтения файлов я писал свой модуль readFile в utils
-// Сильно плохо, что я читаю файлы через него и в тестах?
-
 const resultStylish = readFile('__fixtures__/resultStylish.txt');
 const resultPlain = readFile('__fixtures__/resultPlain.txt');
 
