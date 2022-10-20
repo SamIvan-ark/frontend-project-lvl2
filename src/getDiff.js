@@ -9,24 +9,21 @@ const getDiff = (data1, data2) => {
     const allKeysSorted = _.sortBy(keysUnion);
 
     const diff = allKeysSorted.map((key) => {
-      if (
-        Object.prototype.hasOwnProperty.call(obj1, key)
-        && Object.prototype.hasOwnProperty.call(obj2, key)
-      ) {
-        if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-          return {
-            name: key,
-            valueStatus: 'object',
-            children: iter(obj1[key], obj2[key]),
-          };
-        }
-        if (obj1[key] === obj2[key]) {
-          return {
-            name: key,
-            valueStatus: 'equial',
-            value: obj2[key],
-          };
-        }
+      if (obj1[key] === obj2[key]) {
+        return {
+          name: key,
+          valueStatus: 'equial',
+          value: obj2[key],
+        };
+      }
+      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+        return {
+          name: key,
+          valueStatus: 'object',
+          children: iter(obj1[key], obj2[key]),
+        };
+      }
+      if ((_.has(obj1, key) && _.has(obj2, key)) && (obj1[key] !== obj2[key])) {
         return {
           name: key,
           valueStatus: 'changed',
@@ -34,18 +31,21 @@ const getDiff = (data1, data2) => {
         };
       }
 
-      if (Object.prototype.hasOwnProperty.call(obj1, key)) {
+      if (_.has(obj1, key)) {
         return {
           name: key,
           valueStatus: 'deleted',
           value: obj1[key],
         };
       }
-      return {
-        name: key,
-        valueStatus: 'added',
-        value: obj2[key],
-      };
+      if (_.has(obj2, key)) {
+        return {
+          name: key,
+          valueStatus: 'added',
+          value: obj2[key],
+        };
+      }
+      return null;
     });
 
     return diff;
