@@ -1,9 +1,8 @@
 import readFile from './readFile.js';
+import getExtension from './getFileExtension.js';
 import defineParser from './parsers.js';
 
-const parseFile = (pathToFile) => {
-  const parser = defineParser(pathToFile);
+export default (pathToFile) => {
+  const parser = defineParser(getExtension(pathToFile));
   return parser(readFile(pathToFile));
 };
-
-export default parseFile;
