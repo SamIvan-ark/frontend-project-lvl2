@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getDiff = (data1, data2) => {
+export default (data1, data2) => {
   const iter = (obj1, obj2) => {
     const arr1 = Object.keys(obj1);
     const arr2 = Object.keys(obj2);
@@ -53,5 +53,3 @@ const getDiff = (data1, data2) => {
 
   return iter(data1, data2);
 };
-
-export default getDiff;
